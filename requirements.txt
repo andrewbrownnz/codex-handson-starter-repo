@@ -3,3 +3,4 @@ uvicorn[standard]==0.29.0
 python-multipart==0.0.9
 openai>2
 python-dotenv==1.0.1
+Pillow==10.3.0

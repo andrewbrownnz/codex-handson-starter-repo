@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Executive Business Card Manager</title>
+    <link rel="stylesheet" href="/app/styles.css" />
+  </head>
+  <body>
+    <header class="page-header">
+      <div>
+        <p class="eyebrow">AI workspace</p>
+        <h1>Executive business card manager</h1>
+        <p class="lede">
+          Upload a business card, extract details with OCR, capture your meeting
+          notes, and get an image summary to remember every connection.
+        </p>
+      </div>
+      <div class="pill">OCR → Notes → Visual memory</div>
+    </header>
+
+    <main class="layout">
+      <section class="card">
+        <div class="card-header">
+          <div>
+            <p class="eyebrow">Step 1</p>
+            <h2>Upload business card</h2>
+          </div>
+          <small id="uploadStatus" class="status"></small>
+        </div>
+        <form id="uploadForm" class="stack gap-sm">
+          <label class="input">
+            <span>Business card photo</span>
+            <input id="cardFile" type="file" accept="image/*" required />
+          </label>
+          <button type="submit" class="primary">Extract details</button>
+        </form>
+        <p class="helper">
+          We will detect first/last name, company, logo description, email,
+          phone, address, and the photo timestamp if available.
+        </p>
+      </section>
+
+      <section class="card">
+        <div class="card-header">
+          <div>
+            <p class="eyebrow">Step 2</p>
+            <h2>Card details</h2>
+          </div>
+          <small id="cardTimestamp" class="pill subtle"></small>
+        </div>
+        <div id="cardDetails" class="grid details">
+          <div class="field">
+            <label>First name</label>
+            <div id="firstName" class="value muted">—</div>
+          </div>
+          <div class="field">
+            <label>Last name</label>
+            <div id="lastName" class="value muted">—</div>
+          </div>
+          <div class="field">
+            <label>Company</label>
+            <div id="company" class="value muted">—</div>
+          </div>
+          <div class="field">
+            <label>Logo</label>
+            <div id="logo" class="value muted">—</div>
+          </div>
+          <div class="field">
+            <label>Email</label>
+            <div id="email" class="value muted">—</div>
+          </div>
+          <div class="field">
+            <label>Phone</label>
+            <div id="phone" class="value muted">—</div>
+          </div>
+          <div class="field address">
+            <label>Address</label>
+            <div id="address" class="value muted">—</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="card-header">
+          <div>
+            <p class="eyebrow">Step 3</p>
+            <h2>Meeting context</h2>
+            <p id="currentCardName" class="helper muted"></p>
+          </div>
+          <small id="contextStatus" class="status"></small>
+        </div>
+        <form id="contextForm" class="stack gap-sm">
+          <label class="input">
+            <span>What was the context of your meeting?</span>
+            <textarea
+              id="meetingContext"
+              rows="2"
+              placeholder="Panel dinner at the annual summit, discussing the APAC expansion."
+            ></textarea>
+          </label>
+          <label class="input">
+            <span>What are their priorities?</span>
+            <textarea
+              id="priorities"
+              rows="2"
+              placeholder="Hiring regional sales lead, piloting AI-first sales playbook."
+            ></textarea>
+          </label>
+          <label class="input">
+            <span>Personal notes</span>
+            <textarea
+              id="personalNotes"
+              rows="2"
+              placeholder="Loves jazz, has twins, marathon runner."
+            ></textarea>
+          </label>
+          <button type="submit" class="primary">Save notes &amp; generate visual</button>
+        </form>
+      </section>
+
+      <section class="card">
+        <div class="card-header">
+          <div>
+            <p class="eyebrow">Step 4</p>
+            <h2>Visual memory</h2>
+          </div>
+        </div>
+        <div class="summary">
+          <div class="summary-image">
+            <img id="summaryImage" alt="Summary portrait" />
+            <p class="helper muted">Generated portrait to help you remember the person.</p>
+          </div>
+          <div class="summary-meta">
+            <div class="field">
+              <label>Meeting context</label>
+              <div id="summaryContext" class="value muted">—</div>
+            </div>
+            <div class="field">
+              <label>Priorities</label>
+              <div id="summaryPriorities" class="value muted">—</div>
+            </div>
+            <div class="field">
+              <label>Personal notes</label>
+              <div id="summaryNotes" class="value muted">—</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="card-header">
+          <div>
+            <p class="eyebrow">Archive</p>
+            <h2>Saved contacts</h2>
+            <p class="helper">Load an existing contact to continue the conversation.</p>
+          </div>
+        </div>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Company</th>
+                <th>Captured</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="cardsTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <script src="/app/app.js" defer></script>
+  </body>
+</html>
